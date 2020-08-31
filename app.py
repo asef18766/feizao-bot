@@ -61,12 +61,15 @@ def list_rem()->str:
 def handle_message(event):
     msg = str(event.message.text)
     logging.info(f"receive message:{msg}")
+    
     if msg[:3] == "@肥皂":
         msg = msg[3:]
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text))
+        if msg == "吃藥":
+            line_bot_api.leave_group(event.source.group_id)
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=event.message.text))
 
 
 if __name__ == "__main__":
