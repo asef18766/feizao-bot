@@ -65,7 +65,15 @@ def handle_message(event):
     if msg[:3] == "@肥皂":
         msg = msg[3:]
         if msg == "吃藥":
-            line_bot_api.leave_group(event.source.group_id)
+            try:
+                line_bot_api.leave_group(event.source.group_id)
+            except AttributeError:
+                pass
+            
+            try:
+                line_bot_api.leave_room(event.source.room_id)
+            except AttributeError:
+                pass
         else:
             line_bot_api.reply_message(
                 event.reply_token,
