@@ -10,6 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import logging
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -36,6 +37,7 @@ def callback():
 
 @app.route("/",methods=["GET"])
 def main_page():
+    logging.info("main page")
     return "meow~"
     
 
