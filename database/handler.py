@@ -8,7 +8,7 @@ conn:psycopg2.extensions.connection = psycopg2.connect(DATABASE_URL, sslmode='re
 cursor:psycopg2.extensions.cursor = conn.cursor()
 def init():
     cmd = '''
-    CREATE TABLE IF NOT EXISTS sticky_note(
+    CREATE TABLE sticky_note(
         id serial PRIMARY KEY,
         ctx text
     );
