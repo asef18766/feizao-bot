@@ -9,6 +9,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+import logging
 
 app = Flask(__name__)
 
@@ -23,7 +24,6 @@ def callback():
 
     # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
 
     # handle webhook body
     try:
@@ -41,6 +41,7 @@ def main_page():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    logging.info(f"receive message:{event.message.text}")
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
