@@ -1,3 +1,4 @@
+import logging
 rem_item = []
 def add_rem(item:str):
     global rem_item
@@ -5,6 +6,7 @@ def add_rem(item:str):
 
 def remove_rem(idx:int)->bool:
     global rem_item
+    logging.debug(f"try to delete item {idx}")
     if len(rem_item) < idx:
         return False
     rem_item.pop(index=idx)

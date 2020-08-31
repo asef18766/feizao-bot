@@ -11,7 +11,7 @@ from pics.handler import (
 from sticky_note.handler import (
     add_rem,remove_rem,list_rem
 )
-
+import logging , traceback
 class FeizaoRoot():
     methods = []
     line_bot_api:LineBotApi = None
@@ -44,7 +44,7 @@ class FeizaoRoot():
             event.reply_token,
             TextMessage(text="賀歐")
         )
-        
+
     def __init__(self , line_bot_api:LineBotApi):
         self.line_bot_api = line_bot_api
         for func in dir(self):
@@ -58,8 +58,8 @@ class FeizaoRoot():
                 try:
                     getattr(self,f"cmd_{cmdline[:i]}")(event,cmdline[i:])
                     findcmd = True
-                except:
-                    pass
+                except Exception as e:
+                    logging.error(e)
                 break
         if not findcmd:
             self.line_bot_api.reply_message(
