@@ -7,10 +7,11 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage,
 )
 import logging
 from cmds.root import FeizaoRoot
+from database.handler import init
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -51,4 +52,5 @@ def handle_message(event):
         cmd_proc.parse(event,msg)
 
 if __name__ == "__main__":
+    init()
     app.run()
