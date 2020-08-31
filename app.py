@@ -10,13 +10,15 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import logging
+from cmds.root import FeizaoRoot
+
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('9w6xDK60z7Y5pJ7PoeTGCbFPEKuKONA2tq4kpbB4BApZ8cgbc1+3zzBtK0aV1JpLKkO26A67nkNFhMcv2js6C/pkbpqMJirUesGtpWjMde1stSza08NkTef/8sYIno7IDf8tfAFLt0Uux1uOLSp2QwdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('e683235c8e38f945d628c6855db7f711')
-
+cmd_proc = FeizaoRoot(line_bot_api)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -45,7 +47,6 @@ rem_item = []
 def add_rem(item:str):
     global rem_item
     rem_item.append(item)
-
 def remove_rem(idx:int):
     rem_item.pop(index=idx)
 def list_rem()->str:
@@ -61,24 +62,9 @@ def list_rem()->str:
 def handle_message(event):
     msg = str(event.message.text)
     logging.info(f"receive message:{msg}")
-    
     if msg[:3] == "@肥皂":
         msg = msg[3:]
-        if msg == "吃藥":
-            try:
-                line_bot_api.leave_group(event.source.group_id)
-            except AttributeError:
-                pass
-            
-            try:
-                line_bot_api.leave_room(event.source.room_id)
-            except AttributeError:
-                pass
-        else:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=event.message.text))
-
+        cmd_proc.parse(event,msg)
 
 if __name__ == "__main__":
     app.run()

@@ -2,18 +2,17 @@
     "events": [
         {
             "type": "message",
-            "replyToken": "c75cbc0c5de6413dad0b58ecb89910f5",
+            "replyToken": "7fde158463094809b3e9ef75beac2301",
             "source": {
-                "groupId": "C3d9a8858e3af23aedb3d791c28169bac",
                 "userId": "U6e8bfda02570f99533e98e405b2ca587",
-                "type": "group"
+                "type": "user"
             },
-            "timestamp": 1598874967258,
+            "timestamp": 1598875952762,
             "mode": "active",
             "message": {
                 "type": "text",
-                "id": "12597189256415",
-                "text": "123"
+                "id": "12597281932732",
+                "text": "@肥皂吃藥"
             }
         }
     ],
