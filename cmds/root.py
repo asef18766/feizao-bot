@@ -27,17 +27,24 @@ class FeizaoRoot():
             pass
     def cmd_幫我記(self,event,cmdline:str):
         add_rem(cmdline)
+        self.line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(text="賀歐")
+        )
+
     def cmd_我忘了啥(self,event,cmdline:str):
         self.line_bot_api.reply_message(
             event.reply_token,
             TextMessage(text=list_rem())
         )
+
     def cmd_忘了(self,event,cmdline:str):
         remove_rem(int(cmdline))
         self.line_bot_api.reply_message(
             event.reply_token,
             TextMessage(text="賀歐")
         )
+        
     def __init__(self , line_bot_api:LineBotApi):
         self.line_bot_api = line_bot_api
         for func in dir(self):

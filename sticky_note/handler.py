@@ -11,6 +11,7 @@ def remove_rem(idx:int)->bool:
     return True
 
 def list_rem()->str:
+    global rem_item
     if  len(rem_item) == 0:
         return "沒東西啦 臭ㄐㄐ"
     else:
