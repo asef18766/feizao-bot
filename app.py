@@ -43,10 +43,12 @@ def main_page():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    logging.info(f"receive message:{event.message.text}")
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    msg = str(event.message.text)
+    logging.info(f"receive message:{msg}")
+    if msg[:3] == "@肥皂":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text))
 
 
 if __name__ == "__main__":
