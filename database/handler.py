@@ -1,12 +1,11 @@
 import os
 import psycopg2
 import logging
-
 DATABASE_URL = os.getenv("DATABASE_URL" , "error")
-logging.info(f"db url:{DATABASE_URL}")
 conn:psycopg2.extensions.connection = psycopg2.connect(DATABASE_URL, sslmode='require')
 cursor:psycopg2.extensions.cursor = conn.cursor()
 def init():
+    logging.info(f"db url:{DATABASE_URL}")
     global conn
     global cursor
     cmd = '''
