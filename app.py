@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import logging
 from cmds.root import FeizaoRoot
-from database.handler import init
+from database.handler import init , DATABASE_URL
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -45,6 +45,7 @@ def main_page():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    logging.info(f"db url:{DATABASE_URL}")
     msg = str(event.message.text)
     logging.info(f"receive message:{msg}")
     if msg[:3] == "@肥皂":
