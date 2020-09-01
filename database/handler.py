@@ -13,7 +13,7 @@ def init():
     global inited
     inited = True
     cmd = '''
-    CREATE TABLE sticky_note(
+    CREATE TABLE IF NOT EXSIST sticky_note(
         id serial PRIMARY KEY,
         ctx text
     );
