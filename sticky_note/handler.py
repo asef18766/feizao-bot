@@ -9,7 +9,7 @@ def add_rem(item:str):
 
 def remove_rem(idx:int)->bool:
     cmd = '''
-    DELETE FROM sticky_note WHRER idx == (%s);
+    DELETE FROM sticky_note WHRER id == (%s);
     '''
     cursor.execute(cmd,(idx,))
 
@@ -24,5 +24,5 @@ def list_rem()->str:
     else:
         s = "剩下這些(OuO):\n"
         for i in range(len(rem_item)):
-            s += f"{i}:{rem_item[i]}\n"
+            s += f"{i}:{rem_item[i][0]}\n"
         return s

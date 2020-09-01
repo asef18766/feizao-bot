@@ -14,7 +14,6 @@ def init():
     
     cmd = '''
     CREATE TABLE IF NOT EXISTS sticky_note(
-        id serial PRIMARY KEY,
         ctx text
     );
     '''
