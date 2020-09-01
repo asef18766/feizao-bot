@@ -3,7 +3,7 @@ from database.handler import cursor
 def add_rem(item:str):
     logging.info(f"try to insert item {item}")
     cmd = '''
-    INSERT sticky_note (ctx) VALUES (%s);
+    INSERT INTO sticky_note (ctx) VALUES (%s);
     '''
     cursor.execute(cmd,(item,))
 
