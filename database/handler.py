@@ -20,10 +20,3 @@ def init():
     INSERT INTO sticky_note(ctx) VALUES('test string');
     '''
     cursor.execute(cmd)
-
-def query_single_col(table:str , col:str)->list:
-    cmd ='''
-    SELECT (%s) from (%s); 
-    '''
-    cursor.execute(cmd , (col,table))
-    return cursor.fetchall()
