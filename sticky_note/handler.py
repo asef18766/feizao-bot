@@ -9,7 +9,7 @@ def add_rem(item:str):
 
 def remove_rem(idx:int)->bool:
     cmd = '''
-    DELETE FROM sticky_note WHERE id == (%s);
+    DELETE FROM sticky_note WHERE id = (%s);
     '''
     cursor.execute(cmd,(idx,))
 
