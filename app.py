@@ -20,6 +20,7 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('9w6xDK60z7Y5pJ7PoeTGCbFPEKuKONA2tq4kpbB4BApZ8cgbc1+3zzBtK0aV1JpLKkO26A67nkNFhMcv2js6C/pkbpqMJirUesGtpWjMde1stSza08NkTef/8sYIno7IDf8tfAFLt0Uux1uOLSp2QwdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('e683235c8e38f945d628c6855db7f711')
 cmd_proc = FeizaoRoot(line_bot_api)
+init()
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -54,5 +55,4 @@ def handle_message(event):
         cmd_proc.parse(event,msg)
 
 if __name__ == "__main__":
-    init()
     app.run()
