@@ -17,6 +17,5 @@ def init():
         id serial PRIMARY KEY,
         ctx text
     );
-    INSERT INTO sticky_note(ctx) VALUES('test string');
     '''
     cursor.execute(cmd)

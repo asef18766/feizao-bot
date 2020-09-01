@@ -5,13 +5,13 @@ def add_rem(item:str):
     cmd = '''
     INSERT sticky_note ctx VALUES (%s);
     '''
-    cursor.execute(cmd,(item))
+    cursor.execute(cmd,(item,))
 
 def remove_rem(idx:int)->bool:
     cmd = '''
     DELETE FROM sticky_note WHRER idx == (%s);
     '''
-    cursor.execute(cmd,(idx))
+    cursor.execute(cmd,(idx,))
 
 def list_rem()->str:
     cmd = '''
