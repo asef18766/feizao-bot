@@ -1,18 +1,19 @@
 {
-    "exception":[
+    "exception": [
         "https://truth.bahamut.com.tw/s01/202007/4e52c2980af21e04ab45b91b59d782c0.JPG",
         "https://i.ytimg.com/vi/kz3HzwlcIB8/mqdefault.jpg",
         "https://i.imgur.com/08bDzYq.jpg",
         "https://i.kym-cdn.com/entries/icons/facebook/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.jpg",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRTmiNBSoZW1_jruD1lVNjfzXiteYjsCYyS-Q&usqp=CAU",
-        "https://memes.tw/user-template/30d7bc1c8a3aa078fc975268f51ff23e.png"        
+        "https://memes.tw/user-template/30d7bc1c8a3aa078fc975268f51ff23e.png"
     ],
-    "shock":[
+    "shock": [
         "https://truth.bahamut.com.tw/s01/201609/47eb58a327c095b5a80512e8e4720bf3.PNG"
     ],
-    "fast":[
+    "fast": [
         "https://memes.tw/meme/4a039a33933c7902c7bfbba3b62993dc.png",
         "https://truth.bahamut.com.tw/s01/201901/75c5aa23323b76dc471f9c259dd0df0f.JPG",
         "https://i.imgur.com/m0lOljX.png"
-    ]
+    ],
+    "transform": []
 }
