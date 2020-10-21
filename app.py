@@ -1,5 +1,5 @@
 from flask import Flask, request, abort
-
+from pics import imgur
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -52,5 +52,9 @@ def handle_message(event):
         msg = msg[3:]
         cmd_proc.parse(event,msg)
 
+@app.route("/farm_notify", methods=['POST'])
+def data_center_notification():
+    pass
+
 if __name__ == "__main__":
-    app.run()
+    print(imgur.upload("/home/asef18766/下載/5288fd6deca7eb9f1fa3f61fb065c0c2.png"))

@@ -17,5 +17,9 @@ def init():
         id SERIAL PRIMARY KEY,
         ctx TEXT
     );
+    CREATE TABLE IF NOT EXISTS farm_users(
+        farm_token TEXT PRIMARY KEY,
+        user_line_id TEXT
+    );
     '''
     cursor.execute(cmd)
