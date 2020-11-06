@@ -8,7 +8,6 @@ cursor:psycopg2.extensions.cursor = conn.cursor()
 logging.basicConfig(level=logging.DEBUG)
 
 def init():
-    logging.info(f"db url:{DATABASE_URL}")
     global conn
     global cursor
     
