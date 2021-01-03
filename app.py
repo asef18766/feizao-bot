@@ -1,5 +1,5 @@
-from flask import Flask, request, abort
-
+from flask import Flask, request, abort, make_response
+from pics import imgur
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -12,6 +12,11 @@ from linebot.models import (
 import logging
 from cmds.root import FeizaoRoot
 from database.handler import init
+from farm.handler import (
+    DataCenterAuthFailure,
+    farm_notify_receiver_handler
+)
+from time import sleep
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -52,5 +57,17 @@ def handle_message(event):
         msg = msg[3:]
         cmd_proc.parse(event,msg)
 
+@app.route("/farm_notify", methods=['POST'])
+def data_center_notification():
+    data = request.get_json()
+    try:
+        farm_notify_receiver_handler(data["data_center_token"] ,data["farm_token"], data["msg"], line_bot_api)
+    except IndexError:
+        return "can not found specify target", 404, {'Content-Type': 'application/json'}
+    except DataCenterAuthFailure:
+        abort(403)
+    return 'OK'
+
 if __name__ == "__main__":
-    app.run()
+    #farm_notify_receiver_handler('ko_no_data_center_da', TextMessage(text="just a test") , line_bot_api)
+    pass

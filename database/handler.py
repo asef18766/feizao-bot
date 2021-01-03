@@ -8,7 +8,6 @@ cursor:psycopg2.extensions.cursor = conn.cursor()
 logging.basicConfig(level=logging.DEBUG)
 
 def init():
-    logging.info(f"db url:{DATABASE_URL}")
     global conn
     global cursor
     
@@ -16,6 +15,10 @@ def init():
     CREATE TABLE IF NOT EXISTS sticky_note(
         id SERIAL PRIMARY KEY,
         ctx TEXT
+    );
+    CREATE TABLE IF NOT EXISTS farm_users(
+        farm_token TEXT PRIMARY KEY,
+        user_line_id TEXT
     );
     '''
     cursor.execute(cmd)
