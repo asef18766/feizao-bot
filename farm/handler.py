@@ -1,12 +1,12 @@
+from . import *
+
 from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.models import TextMessage
 from database.handler import cursor
 import logging
-
-DATA_CENTER_TOKEN = "ko_no_data_center_da"
-LINE_BOT_CLIENT_TOKEN = "ko_no_linebot_da"
+import requests
 
 class DataCenterAuthFailure(Exception):
     pass
@@ -21,7 +21,13 @@ def data_center_auth(func):
     return wrapper
 
 def query_farm_exist(farm_token:str)->bool:
-    return True
+    logging.info("try 2 send request")
+    req_data = {"LINE_BOT_CLIENT_TOKEN":LINE_BOT_CLIENT_TOKEN,"farm_token":farm_token}
+    logging.info(f"req_data:{req_data}")
+    with requests.post(f"{DATA_CENTER_URL}/line/check_farm", json=req_data) as resp:
+        logging.info("eof request")
+        logging.info(f"raw resp val:{resp.text}")
+        return resp.json()["exsist"]
 
 def register_farm(user_id:str , farm_token:str):
     # post and check if farm exsist

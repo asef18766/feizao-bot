@@ -70,7 +70,7 @@ class FeizaoRoot():
                     getattr(self,f"cmd_{cmdline[:i]}")(event,cmdline[i:])
                     findcmd = True
                 except Exception as e:
-                    logging.error(e)
+                    logging.error(traceback.format_exc())
                 break
         if not findcmd:
             self.line_bot_api.reply_message(
