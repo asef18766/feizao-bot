@@ -47,7 +47,7 @@ def callback():
 @app.route("/",methods=["GET"])
 def main_page():
     logging.info("main page")
-    return "meow~"
+    return "meow~~v1.5"
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
