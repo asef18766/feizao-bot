@@ -2,7 +2,8 @@ from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.models import (
-    TextMessage
+    TextMessage,
+    VideoSendMessage
 )
 from linebot.models.events import MessageEvent
 from linebot.models.sources import SourceUser
@@ -56,6 +57,14 @@ class FeizaoRoot():
             TextMessage(text="ok惹~~")
         )
 
+    def cmd_發錢(self,event:MessageEvent,cmdline:str):
+        self.line_bot_api.push_message(
+            event.reply_token,
+            VideoSendMessage(
+                original_content_url="https://www.youtube.com/watch?v=072tU1tamd0",
+                preview_image_url="https://i.imgur.com/1pKzOW2.png"
+            )
+        )
     def __init__(self , line_bot_api:LineBotApi):
         self.line_bot_api = line_bot_api
         for func in dir(self):
