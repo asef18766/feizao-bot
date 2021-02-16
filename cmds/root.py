@@ -3,7 +3,9 @@ from linebot import (
 )
 from linebot.models import (
     TextMessage,
-    VideoSendMessage
+    TemplateSendMessage,
+    ButtonsTemplate,
+    URIAction
 )
 from linebot.models.events import MessageEvent
 from linebot.models.sources import SourceUser
@@ -58,11 +60,22 @@ class FeizaoRoot():
         )
 
     def cmd_發錢(self,event:MessageEvent,cmdline:str):
-        self.line_bot_api.push_message(
+        self.line_bot_api.reply_message(
             event.reply_token,
-            VideoSendMessage(
-                original_content_url="https://www.youtube.com/watch?v=072tU1tamd0",
-                preview_image_url="https://i.imgur.com/1pKzOW2.png"
+            TemplateSendMessage(
+                alt_text="this is a buttons template",
+                template=ButtonsTemplate(
+                    type="buttons",
+                    thumbnail_image_url="https://i.imgur.com/X2Ty7qW.png",
+                    title='LINE Pay紅包',
+                    text='肥皂發了數個紅包到聊天室。先搶先贏，立即打開紅包！',
+                    actions=[
+                        URIAction(
+                            label='查看紅包狀態',
+                            uri='https://www.youtube.com/watch?v=072tU1tamd0'
+                        )
+                    ]
+                )
             )
         )
     def __init__(self , line_bot_api:LineBotApi):
