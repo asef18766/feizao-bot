@@ -63,7 +63,7 @@ class FeizaoRoot():
         self.line_bot_api.reply_message(
             event.reply_token,
             TemplateSendMessage(
-                alt_text="您收到了紅包訊息！\nCheck it out on your mobile device.",
+                alt_text="您收到了紅包訊息！",
                 template=ButtonsTemplate(
                     type="buttons",
                     thumbnail_image_url="https://i.imgur.com/X2Ty7qW.png",
