@@ -5,7 +5,7 @@ logging.basicConfig(level=logging.DEBUG)
 def init():
     global conn
     global cursor
-    
+
     cmd = '''
     CREATE TABLE IF NOT EXISTS sticky_note(
         id SERIAL PRIMARY KEY,
@@ -15,6 +15,10 @@ def init():
         farm_token TEXT PRIMARY KEY,
         user_line_id TEXT
     );
+    '''
+
+    #TODO: meso plot    
+    '''
     CREATE TABLE IF NOT EXISTS maple_pt(
         id serial PRIMARY KEY,
         pt int,
