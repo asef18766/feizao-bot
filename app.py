@@ -16,9 +16,12 @@ from farm.handler import (
     DataCenterAuthFailure,
     farm_notify_receiver_handler
 )
+from ntr.handler import (
+    ntr_handler
+)
 from time import sleep
 from os import getenv
-
+import traceback, sys
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
@@ -66,6 +69,13 @@ def data_center_notification():
     except IndexError:
         return "can not found specify target", 404, {'Content-Type': 'application/json'}
     except DataCenterAuthFailure:
+        abort(403)
+    return 'OK'
+
+@app.route("/push_ntr", methods=['POST'])
+def ntr_msg():
+    data = request.get_json()
+    if not ntr_handler(data, line_bot_api):
         abort(403)
     return 'OK'
 
