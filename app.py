@@ -17,13 +17,14 @@ from farm.handler import (
     farm_notify_receiver_handler
 )
 from time import sleep
+from os import getenv
 
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('9w6xDK60z7Y5pJ7PoeTGCbFPEKuKONA2tq4kpbB4BApZ8cgbc1+3zzBtK0aV1JpLKkO26A67nkNFhMcv2js6C/pkbpqMJirUesGtpWjMde1stSza08NkTef/8sYIno7IDf8tfAFLt0Uux1uOLSp2QwdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('e683235c8e38f945d628c6855db7f711')
+line_bot_api = LineBotApi(getenv("LINE_BOT_API"))
+handler = WebhookHandler(getenv("WEBHOOK_HANDLER"))
 cmd_proc = FeizaoRoot(line_bot_api)
 init()
 

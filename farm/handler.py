@@ -4,7 +4,7 @@ from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.models import TextMessage
-from database.handler import cursor
+from database import cursor
 import logging
 import requests
 

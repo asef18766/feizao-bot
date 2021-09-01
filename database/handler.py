@@ -1,12 +1,7 @@
-import os
-import psycopg2
 import logging
-DATABASE_URL = os.getenv("DATABASE_URL" , "error")
-conn:psycopg2.extensions.connection = psycopg2.connect(DATABASE_URL, sslmode='require')
-conn.autocommit = True
-cursor:psycopg2.extensions.cursor = conn.cursor()
-logging.basicConfig(level=logging.DEBUG)
+from . import conn, cursor
 
+logging.basicConfig(level=logging.DEBUG)
 def init():
     global conn
     global cursor
@@ -19,6 +14,15 @@ def init():
     CREATE TABLE IF NOT EXISTS farm_users(
         farm_token TEXT PRIMARY KEY,
         user_line_id TEXT
+    );
+    CREATE TABLE IF NOT EXISTS maple_pt(
+        id serial PRIMARY KEY,
+        pt int,
+        record_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    );
+    CREATE TABLE IF NOT EXISTS auth_role(
+        user_line_id TEXT,
+        role TEXT
     );
     '''
     cursor.execute(cmd)
