@@ -1,3 +1,5 @@
+from cq_notify.user import cq_create_token, cq_register_user, query_line_id
+from os import getenv
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -19,6 +21,9 @@ from sticky_note.handler import (
 )
 import logging , traceback
 from farm.handler import register_farm
+
+ADMIN = getenv("HISUKURIFU", "")
+
 class FeizaoRoot():
     methods = []
     line_bot_api:LineBotApi = None
@@ -78,12 +83,49 @@ class FeizaoRoot():
                 )
             )
         )
+    def cmd_克魯生成(self,event:MessageEvent,cmdline:str):
+        logging.warning(f"src {event.source} try to generate token")
+        
+        if (event.source.user_id != ADMIN):
+            self.line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(text="だが断る")
+            )
+        else:
+            self.line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(text=cq_create_token())
+            )
+    def cmd_克魯註冊(self,event:MessageEvent,cmdline:str):
+        try:
+            user_token = cmdline
+            logging.info(f"receive cq register token {user_token}")
+            line_id = query_line_id(user_token)
+            if line_id != "NULL":
+                self.line_bot_api.reply_message(
+                    event.reply_token,
+                    TextMessage(text="だが断る")
+                )
+                return
+            
+            cq_register_user(user_token, event.source.user_id)
+            self.line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(text="done ~~ please check your client ~~ OuO")
+            )
+        except Exception as e:
+            self.line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(text="だが 断る")
+            )
+            raise e
     def __init__(self , line_bot_api:LineBotApi):
         self.line_bot_api = line_bot_api
         for func in dir(self):
             if func[:4] == "cmd_":
                 self.methods.append(func)
-    
+                logging.info(f"command {func} successfully register")
+                
     def parse(self,event,cmdline:str):
         findcmd = False
         for i in range(1,5):

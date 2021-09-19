@@ -15,6 +15,10 @@ def init():
         farm_token TEXT PRIMARY KEY,
         user_line_id TEXT
     );
+    CREATE TABLE IF NOT EXISTS cq_users(
+        user_token TEXT PRIMARY KEY,
+        user_line_id TEXT
+    );
     '''
 
     #TODO: meso plot    

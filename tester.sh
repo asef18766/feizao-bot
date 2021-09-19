@@ -7,5 +7,6 @@ if [ ! -f .env ]; then
     heroku config:get IMGUR_SECRET -s -a feizao-bot >> .env
     heroku config:get IMGUR_ACCESS_TOKEN -s -a feizao-bot >> .env
     heroku config:get IMGUR_REFRESH_TOKEN -s -a feizao-bot >> .env
+    heroku config:get HISUKURIFU -s -a feizao-bot >> .env
 fi
 heroku local -e .env

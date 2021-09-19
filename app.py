@@ -1,3 +1,4 @@
+from cq_notify.user import CQUserAuthFailure, cq_user_auth, send_user_notify
 from flask import Flask, request, abort, make_response
 from pics import imgur
 from linebot import (
@@ -21,6 +22,7 @@ from ntr.handler import (
 )
 from time import sleep
 from os import getenv
+from pics.imgur import upload
 import traceback, sys
 logging.basicConfig(level=logging.DEBUG)
 
@@ -79,6 +81,19 @@ def ntr_msg():
         abort(403)
     return 'OK'
 
+@app.route("/cq_notify", methods=['POST'])
+def cq_notify():
+    user_token = request.form.get("user_token")
+    try:
+        line_id = cq_user_auth(user_token)
+        file = request.files.get('screenshot')
+        local_fp = f"/tmp/{file.filename}"
+        file.save(local_fp)
+        remote_link = upload(local_fp)
+        send_user_notify(line_id, remote_link, line_bot_api)
+        return 'OK'
+    except CQUserAuthFailure:
+        abort(403)
 if __name__ == "__main__":
     #farm_notify_receiver_handler('ko_no_data_center_da', TextMessage(text="just a test") , line_bot_api)
     pass
