@@ -91,6 +91,7 @@ def cq_notify():
         file.save(local_fp)
         remote_link = upload(local_fp)
         send_user_notify(line_id, remote_link, line_bot_api)
+        return 'OK'
     except CQUserAuthFailure:
         abort(403)
 if __name__ == "__main__":
